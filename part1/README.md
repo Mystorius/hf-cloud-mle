@@ -9,20 +9,20 @@ The memory requirement for running a model like Mistral-7B or any LLM varies dep
    - Total memory needed for inference = `7.24 billion parameters * 2 bytes ≈ 15GB of GPU memory`.
    - On a **T4 GPU**, which has **16GB of memory**, you can run inference without any issues.
 
-Pro Tip: You can use techniques like **quantization** to reduce the model size and memory requirements for inference. We have an extensive guide on [Optimizing LLMs for Speed and Memory](hthttps://discuss.huggingface.co/t/memory-requirements-for-running-llm/57282) that you might find helpful. Also have a look at the [Hugging Face Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already quantized by our community members.
+Pro Tip: You can use techniques like **quantization** to reduce the model size and memory requirements for inference. We have an extensive guide on [Optimizing LLMs for Speed and Memory](hthttps://discuss.huggingface.co/t/memory-requirements-for-running-llm/57282) that you might find helpful. Also have a look at the [🤗 Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already quantized by our community members.
    
 2. **Training**:
    - Training is more memory-intensive because you need to store activations, gradients, and optimizer states. A rough estimate is **3x to 4x** the model size.
-   - For Mistral-7B: Total memory for training `3 * 15 ≈ 45GB`.
+   - For Mistral-7B: Total memory for training `3 * 15 ≈ 45GB`. Have a look at the [VRAM Estimator by Alex](https://vram.asmirnov.xyz) to get a rough estimation.
    - Since the T4 GPU has only 16GB of memory, we need to use techniques like [**PEFT - Parameter-Efficient Fine-Tuning**](https://huggingface.co/docs/peft/en/index) (for example [**LoRA - Low-Rank Adaptation**](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora)), and **memory-efficient libraries** like [bitsandbytes](https://huggingface.co/docs/bitsandbytes/v0.43.2/index) to reduce memory consumption.
 ---
 ### **Code Example for Inference with Mistral-7B**
 The notebook [Mistral7b-inference](./Mistral7b-Inference.ipynb) provides a full example of how to run inference with Mistral-7B on a T4 GPU. 
-We'll use Hugging Face’s [`transformers`](https://huggingface.co/docs/transformers/en/index) libary to load the model and tokenizer, and run inference on a sample text.
+We'll use 🤗’s [`transformers`](https://huggingface.co/docs/transformers/en/index) libary to load the model and tokenizer, and run inference on a sample text.
 
 ### **Code Example for Fine-Tuning Mistral-7B**
 The notebook [Mistral7b-FineTuning](Mistral7b-FineTuning.ipynb) provides a full example of how to fine-tune Mistral-7B on a T4 GPU. 
-We'll use Hugging Face’s `transformers`, `datasets`, and `peft` libraries to load the model, tokenizer, and dataset, and fine-tune the model on a custom dataset.
+We'll use 🤗’s `transformers`, `datasets`, and `peft` libraries to load the model, tokenizer, and dataset, and fine-tune the model on a custom dataset.
 
 ## **Deployment Architectures for Real-Time Systems**
 When deploying an LLM for real-time customer interactions on platforms like AWS or GCP, you have multiple options based on your needs, infrastructure, and desired level of control. 
@@ -52,7 +52,7 @@ You can either **build it yourself** by setting up custom API endpoints or lever
    - **AWS SageMaker Real-Time Inference Endpoints**: These endpoints are fully managed, providing easy deployment of machine learning models with auto-scaling and monitoring out-of-the-box. 
    Ideal for real-time customer engagement where low latency and high throughput are essential. [Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html)
    - **GCP Vertex AI Endpoints**: Similar to SageMaker, Vertex AI allows you to deploy models at scale with minimal setup, offering auto-scaling, versioning, and monitoring. [Guide](https://cloud.google.com/vertex-ai/docs/predictions/deploy-model-api)
-   - **Hugging Face Inference Endpoints**: You can deploy LLMs directly on Hugging Face's platform with support for real-time inference, scaling, and monitoring. [Guide](https://huggingface.co/blog/inference-endpoints-llm)
+   - **🤗 Inference Endpoints**: You can deploy LLMs directly on 🤗's platform with support for real-time inference, scaling, and monitoring. [Guide](https://huggingface.co/blog/inference-endpoints-llm)
   
    **Pros**:
    - Reduced operational complexity.
@@ -76,7 +76,7 @@ Here are strategies you can employ to reduce latency and maximizing throughput:
    - **Quantization**: Convert the model to lower precision using tools like `bitsandbytes` (like we used for training), which can drastically reduce inference time and memory usage.
    - **Distillation**: Use a smaller distilled version of the model that retains performance but can process requests faster. 
 
-Have a look at the [Hugging Face Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already optimised by our community members.
+Have a look at the [🤗 Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already optimised by our community members.
 
 2. **Load Balancing & Auto-scaling**:
    - **Horizontal Scaling**: Use auto-scaling to deploy multiple instances of the model across several GPUs/CPUs. Services like **AWS Elastic Load Balancing (ELB)** or **GCP Load Balancer** can distribute the incoming traffic evenly.

@@ -1,7 +1,7 @@
 # Container Creation and Testing Exercise
 
-## Updating the Dockerfile for CUDA and Hugging Face on H100 
-We need to ensure that the Dockerfile is using a CUDA version that supports the latest NVIDIA H100 GPUs, and install the necessary libraries, including Hugging Face `transformers` and `accelerate` for optimal GPU support. 
+## Updating the Dockerfile for CUDA and 🤗 on H100 
+We need to ensure that the Dockerfile is using a CUDA version that supports the latest NVIDIA H100 GPUs, and install the necessary libraries, including 🤗 `transformers` and `accelerate` for optimal GPU support. 
 The base image should also include the `cuDNN` library.
 
 The dockerfile can be found [here](./Dockerfile).
