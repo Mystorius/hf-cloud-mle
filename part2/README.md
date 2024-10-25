@@ -35,4 +35,6 @@ By utilizing a CI/CD pipeline, teams can automate the processes of building, tes
 
 To ensure that automated builds are successful, it's essential to verify that the Docker image functions correctly and that all tests pass. One effective strategy is to tag the image with the build number or a dev tag. Then, this tagged image can be pulled to a runner equipped with an H100 GPU to execute the tests. If all tests are successful, the image can then be pushed to the registry with the `latest` tag.
 
-You can find an example of a GitHub Actions workflow [here](./.github/workflows/build-and-test.yml). You will see that the workflow fails because free tier github actions does not have access to an H100 GPU. However, you can use this as a template to build your own CI/CD pipeline.
+You can find an example of a GitHub Actions workflow [here](./.github/workflows/build-and-test.yml). 
+You will see that the workflow fails because free tier github actions does not have access to an H100 GPU. 
+However, you can use this as a template to build your own CI/CD pipeline.

@@ -57,12 +57,12 @@ jobs:
       - name: Test the Docker image
         id: test_image
         run: |
-          if docker run --gpus=all your-docker-repo/hf-transformers-cuda:dev; then
+          if docker run --gpus=all mystorius/hf-cloud-mle:dev; then
             echo "Docker container ran successfully with GPU support."
             echo "::set-output name=result::success"  # Set output for the next step
           else
             echo "GPU support not available. Running without GPU..."
-            docker run your-docker-repo/hf-transformers-cuda:dev
+            docker run mystorius/hf-cloud-mle:dev
             echo "::set-output name=result::failure"  # Set output for the next step
           fi
 
@@ -70,5 +70,5 @@ jobs:
       - name: Tag and Push the latest Docker image
         if: steps.test_image.outputs.result == 'success'  # Only run if the tests pass
         run: |
-          docker tag your-docker-repo/hf-transformers-cuda:dev your-docker-repo/hf-transformers-cuda:latest
-          docker push your-docker-repo/hf-transformers-cuda:latest
+          docker tag mystorius/hf-cloud-mle:dev mystorius/hf-cloud-mle:latest
+          docker push mystorius/hf-cloud-mle:latest

@@ -78,7 +78,9 @@ Here are strategies you can employ to reduce latency and maximizing throughput:
 
 1. **Model Optimization**:
    - **Quantization**: Convert the model to lower precision using tools like `bitsandbytes` (like we used for training), which can drastically reduce inference time and memory usage.
-   - **Distillation**: Use a smaller distilled version of the model that retains performance but can process requests faster. Have a look at the [Hugging Face Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already distilled by our community members.
+   - **Distillation**: Use a smaller distilled version of the model that retains performance but can process requests faster. 
+
+Have a look at the [Hugging Face Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already optimised by our community members.
 
 2. **Load Balancing & Auto-scaling**:
    - **Horizontal Scaling**: Use auto-scaling to deploy multiple instances of the model across several GPUs/CPUs. Services like **AWS Elastic Load Balancing (ELB)** or **GCP Load Balancer** can distribute the incoming traffic evenly.
