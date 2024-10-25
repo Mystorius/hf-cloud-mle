@@ -6,6 +6,8 @@ The base image should also include the `cuDNN` library.
 
 The dockerfile can be found [here](./Dockerfile).
 
+CUDA device compatibility can be tricky, you can find the hardware based `Compute Capability` matrix [here](https://developer.nvidia.com/cuda-gpus). To check which CUDA Toolkit version is supported, have a look at [CUDA Wikipedia page](https://en.wikipedia.org/wiki/CUDA#GPUs_supported). For the H100 the CUDA Toolkit version should be 11.8 or higher.
+
 ## Local Build and Distribution
 ### Building the Docker Image
 To build the Docker image locally, run the the following command:
@@ -36,4 +38,10 @@ By utilizing a CI/CD pipeline, teams can automate the processes of building, tes
 To ensure that automated builds are successful, it's essential to verify that the Docker image functions correctly and that all tests pass. One effective strategy is to tag the image with the build number or a dev tag. Then, this tagged image can be pulled to a runner equipped with an H100 GPU to execute the tests. If all tests are successful, the image can then be pushed to the registry with the `latest` tag.
 
 You can find an example of a GitHub Actions workflow [here](./.github/workflows/build-and-test.yml). 
-You will see that the last step `Tag and Push the latest Docker image` is skipped because the free tier of GitHub Actions does not support GPU's.
+You will see that the last step `Tag and Push the latest Docker image` is skipped because the free tier of GitHub Actions does not support GPU's so the tests will fail.
+
+
+## Testing the Docker Image on a H100
+To test the Docker image on an H100 GPU, I rented one on [Runpod](https://www.runpod.io).
+You can see the results in the image below.
+![alt text](image.png)

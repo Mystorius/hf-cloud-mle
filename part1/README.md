@@ -1,6 +1,5 @@
 # Fine-tuning a Large Language Model (LLM)
 This guide will help you fine-tune a large language model (LLM) like Mistral-7B on your internal datasets. We'll cover memory requirements, data formatting, optimal parameters, and model evaluation. Let's dive in!
----
 
 ## **Memory Requirements**
 The memory requirement for running a model like Mistral-7B or any LLM varies depending on the task, whether you're running inference or training.
@@ -14,14 +13,14 @@ Pro Tip: You can use techniques like **quantization** to reduce the model size a
    
 2. **Training**:
    - Training is more memory-intensive because you need to store activations, gradients, and optimizer states. A rough estimate is **3x to 4x** the model size.
-   - For Mistral-7B: Total memory for training ≈ `3 * 15 ≈ 45GB`.
-   - Since your T4 GPU has only 16GB of memory, you would need to use techniques like **gradient checkpointing**, **LoRA (Low-Rank Adaptation)**, **PEFT (Parameter-Efficient Fine-Tuning)**, and `bitsandbytes` library for memory efficiency.
+   - For Mistral-7B: Total memory for training `3 * 15 ≈ 45GB`.
+   - Since the T4 GPU has only 16GB of memory, we need to use techniques like [**PEFT - Parameter-Efficient Fine-Tuning**](https://huggingface.co/docs/peft/en/index) (for example [**LoRA - Low-Rank Adaptation**](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora)), and **memory-efficient libraries** like [bitsandbytes](https://huggingface.co/docs/bitsandbytes/v0.43.2/index) to reduce memory consumption.
 ---
-#### **Code Example for Inference with Mistral-7B**
+### **Code Example for Inference with Mistral-7B**
 The notebook [Mistral7b-inference](./Mistral7b-Inference.ipynb) provides a full example of how to run inference with Mistral-7B on a T4 GPU. 
-We'll use Hugging Face’s `transformers` libary to load the model and tokenizer, and run inference on a sample text.
+We'll use Hugging Face’s [`transformers`](https://huggingface.co/docs/transformers/en/index) libary to load the model and tokenizer, and run inference on a sample text.
 
-#### **Code Example for Fine-Tuning Mistral-7B**
+### **Code Example for Fine-Tuning Mistral-7B**
 The notebook [Mistral7b-FineTuning](Mistral7b-FineTuning.ipynb) provides a full example of how to fine-tune Mistral-7B on a T4 GPU. 
 We'll use Hugging Face’s `transformers`, `datasets`, and `peft` libraries to load the model, tokenizer, and dataset, and fine-tune the model on a custom dataset.
 
@@ -31,7 +30,7 @@ You can either **build it yourself** by setting up custom API endpoints or lever
 
 1. **Build It Yourself: Custom API Endpoint**
 
-   You can deploy the model as a custom API using containerized solutions like **Docker** or **Kubernetes**. 
+   You can deploy the model as a custom API using containerized solutions like **Docker** and **Kubernetes**. 
    This approach gives you more flexibility and control over how the model is deployed, updated, and scaled. 
 
    - **Amazon EC2** instances can host the model as a REST API for real-time inference.
@@ -92,7 +91,7 @@ Given the complexity of these models, subtle changes in the data or environment 
 Therefore, thorough testing is crucial to ensure that the model continues to meet the desired performance standards and aligns with user expectations.
 
 Pro Tip: Use tools like **Amazon CloudWatch** or **GCP Monitoring** to track key performance metrics, such as latency, throughput, and error rates.
-You should also be aware of any regulatory requirements or ethical considerations that may impact your model's deployment and monitoring. 
+You should also be aware of any regulatory requirements or ethical considerations that may impact your model's deployment. 
 For models in the EU that fall under the AI-Act have a look at the following evaluation framework [COMPL-AI](https://compl-ai.org).
 
 ### Conclusion
