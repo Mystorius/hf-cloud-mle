@@ -1,11 +1,8 @@
 # Fine-tuning a Large Language Model (LLM)
-
 This guide will help you fine-tune a large language model (LLM) like Mistral-7B on your internal datasets. We'll cover memory requirements, data formatting, optimal parameters, and model evaluation. Let's dive in!
-
 ---
 
 ## **Memory Requirements**
-
 The memory requirement for running a model like Mistral-7B or any LLM varies depending on the task, whether you're running inference or training.
 
 1. **Inference**:
@@ -54,9 +51,9 @@ You can either **build it yourself** by setting up custom API endpoints or lever
    If you prefer a more hands-off approach, you can use managed services like:
 
    - **AWS SageMaker Real-Time Inference Endpoints**: These endpoints are fully managed, providing easy deployment of machine learning models with auto-scaling and monitoring out-of-the-box. 
-   Ideal for real-time customer engagement where low latency and high throughput are essential.
-   - **GCP Vertex AI Endpoints**: Similar to SageMaker, Vertex AI allows you to deploy models at scale with minimal setup, offering auto-scaling, versioning, and monitoring.
-   - **Hugging Face Inference Endpoints**: You can deploy LLMs directly on Hugging Face's platform with support for real-time inference, scaling, and monitoring.
+   Ideal for real-time customer engagement where low latency and high throughput are essential. [Guide](https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html)
+   - **GCP Vertex AI Endpoints**: Similar to SageMaker, Vertex AI allows you to deploy models at scale with minimal setup, offering auto-scaling, versioning, and monitoring. [Guide](https://cloud.google.com/vertex-ai/docs/predictions/deploy-model-api)
+   - **Hugging Face Inference Endpoints**: You can deploy LLMs directly on Hugging Face's platform with support for real-time inference, scaling, and monitoring. [Guide](https://huggingface.co/blog/inference-endpoints-llm)
   
    **Pros**:
    - Reduced operational complexity.
@@ -89,9 +86,20 @@ Have a look at the [Hugging Face Model Hub Mistral 7b](https://huggingface.co/mo
 3. **Edge Deployment**:
    - For latency-critical use cases, consider **edge deployment** to serve the model closer to the user’s location.
 
+#### **Model Evaluation and Monitoring**
+LLM's can exhibit unexpected behaviors, making evaluation and monitoring essential after each deployment. 
+Given the complexity of these models, subtle changes in the data or environment can lead to significant deviations in performance. 
+Therefore, thorough testing is crucial to ensure that the model continues to meet the desired performance standards and aligns with user expectations.
+
+Pro Tip: Use tools like **Amazon CloudWatch** or **GCP Monitoring** to track key performance metrics, such as latency, throughput, and error rates.
+You should also be aware of any regulatory requirements or ethical considerations that may impact your model's deployment and monitoring. 
+For models in the EU that fall under the AI-Act have a look at the following evaluation framework [COMPL-AI](https://compl-ai.org).
+
 ### Conclusion
 I would recommend starting with the **easiest deployment option** to quickly test and iterate. 
 
-**Testing fast and often is critical** to successfully fine-tuning your model for real-world applications. Rapid iteration enables you to tweak your LLM based on real-time results, ensuring it aligns with your specific use cases. As your system evolves, you can later explore more customized deployment options if needed.
+**Testing fast and often is critical** to successfully fine-tuning your model for real-world applications. 
+Rapid iteration enables you to tweak your LLM based on real-time results, ensuring it aligns with your specific use cases. 
+As your system evolves, you can later explore more customized deployment options if needed.
 
 For additional insights and best practices, I highly recommend exploring the excellent guides on **[ml-ops.org](https://ml-ops.org)**, which provide valuable resources for optimizing machine learning operations, deployments, and iteration workflows.
