@@ -35,7 +35,7 @@ jobs:
       # Step 4: Push the dev Docker image to the registry
       - name: Push the dev Docker image
         run: |
-          docker push$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+          docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 
   test:
     runs-on: ubuntu-latest # Here you would use a GPU-enabled runner
@@ -56,18 +56,18 @@ jobs:
       # Step 3: Pull the dev Docker image
       - name: Pull the dev Docker image
         run: |
-          docker pull$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+          docker pull $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 
       # Step 4: Test the Docker image locally with GPU
       - name: Test the Docker image
         id: test_image
         run: |
-          if docker run --gpus=all$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG; then
+          if docker run --gpus=all $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG; then
             echo "Docker container ran successfully with GPU support."
             echo "::set-output name=result::success"  # Set output for the next step
           else
             echo "GPU support not available. Running without GPU..."
-            docker run$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+            docker run $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
             echo "::set-output name=result::failure"  # Set output for the next step
           fi
 
@@ -75,5 +75,5 @@ jobs:
       - name: Tag and Push the latest Docker image
         if: steps.test_image.outputs.result == 'success'  # Only run if the tests pass
         run: |
-          docker tag$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG mystorius/hf-cloud-mle:latest
+          docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG mystorius/hf-cloud-mle:latest
           docker push mystorius/hf-cloud-mle:latest
