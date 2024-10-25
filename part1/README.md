@@ -21,11 +21,11 @@ Pro Tip: You can use techniques like **quantization** to reduce the model size a
    - Since your T4 GPU has only 16GB of memory, you would need to use techniques like **gradient checkpointing**, **LoRA (Low-Rank Adaptation)**, **PEFT (Parameter-Efficient Fine-Tuning)**, and `bitsandbytes` library for memory efficiency.
 ---
 #### **Code Example for Inference with Mistral-7B**
-The notebook 'Mistral7b-inference.ipynb' provides a full example of how to run inference with Mistral-7B on a T4 GPU. 
+The notebook [Mistral7b-inference](./Mistral7b-Inference.ipynb) provides a full example of how to run inference with Mistral-7B on a T4 GPU. 
 We'll use Hugging Face’s `transformers` libary to load the model and tokenizer, and run inference on a sample text.
 
 #### **Code Example for Fine-Tuning Mistral-7B**
-The notebook 'Mistral7b-FineTuning.ipynb' provides a full example of how to fine-tune Mistral-7B on a T4 GPU. 
+The notebook [Mistral7b-FineTuning](Mistral7b-FineTuning.ipynb) provides a full example of how to fine-tune Mistral-7B on a T4 GPU. 
 We'll use Hugging Face’s `transformers`, `datasets`, and `peft` libraries to load the model, tokenizer, and dataset, and fine-tune the model on a custom dataset.
 
 ## **Deployment Architectures for Real-Time Systems**
