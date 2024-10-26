@@ -1,11 +1,12 @@
 # Fine-tuning a Large Language Model (LLM)
-This guide will help you fine-tune a large language model (LLM) like Mistral-7B on your internal datasets. We'll cover memory requirements, data formatting, optimal parameters, and model evaluation. Let's dive in!
+This guide will help you fine-tune a large language model (LLM) like Mistral-7B on your internal datasets. 
+We'll cover memory requirements, data formatting, optimal parameters, and model evaluation.
 
 ## **Memory Requirements**
 The memory requirement for running a model like Mistral-7B or any LLM varies depending on the task, whether you're running inference or training.
 
 1. **Inference**:
-   - Mistral-7B has about **7.24 billion parameters**. The model uses BF16 (bfloat16) precision, which is **16 bits** or **2 bytes** wide, to store the parameters.
+   - Mistral-7B has about **7.24 billion parameters**. The model uses BF16 (bfloat16) precision, which uses **16 bits** or **2 bytes** to store the parameters.
    - Total memory needed for inference = `7.24 billion parameters * 2 bytes ≈ 15GB of GPU memory`.
    - On a **T4 GPU**, which has **16GB of memory**, you can run inference without any issues.
 
@@ -26,7 +27,7 @@ We'll use 🤗’s `transformers`, `datasets`, and `peft` libraries to load the 
 
 ## **Deployment Architectures for Real-Time Systems**
 When deploying an LLM for real-time customer interactions on platforms like AWS or GCP, you have multiple options based on your needs, infrastructure, and desired level of control. 
-You can either **build it yourself** by setting up custom API endpoints or leverage **managed services** that simplify scaling and reduce operational overhead.
+On the one end of the spectrum you can **build it yourself** by setting up custom API endpoints or on the other side leverage **managed services** that simplify scaling and reduce operational overhead.
 
 1. **Build It Yourself: Custom API Endpoint**
 
@@ -67,22 +68,22 @@ You can either **build it yourself** by setting up custom API endpoints or lever
 
 #### **Reducing Latency and Increasing Throughput**
 
-Here are strategies you can employ to reduce latency and maximizing throughput:
+Here are strategies you can employ to reduce latency and maximizing throughput. Have a look at our in depth [guide](https://huggingface.co/docs/transformers/v4.46.0/performance).
 
 1. **GPU Acceleration**:
    - Use **GPUs** for faster inference, especially for large models. GPU's will be more expensive but will provide a significant speedup.
 
-1. **Model Optimization**:
+2. **Model Optimization**:
    - **Quantization**: Convert the model to lower precision using tools like `bitsandbytes` (like we used for training), which can drastically reduce inference time and memory usage.
    - **Distillation**: Use a smaller distilled version of the model that retains performance but can process requests faster. 
 
 Have a look at the [🤗 Model Hub Mistral 7b](https://huggingface.co/models?other=base_model:quantized:mistralai/Mistral-7B-Instruct-v0.3) where you can find instruction tunes models that are already optimised by our community members.
 
-2. **Load Balancing & Auto-scaling**:
+3. **Load Balancing & Auto-scaling**:
    - **Horizontal Scaling**: Use auto-scaling to deploy multiple instances of the model across several GPUs/CPUs. Services like **AWS Elastic Load Balancing (ELB)** or **GCP Load Balancer** can distribute the incoming traffic evenly.
    - **Caching**: For repetitive requests, implement response caching mechanisms using tools like **Amazon ElastiCache** or **Redis** to reduce the load on the model inference.
 
-3. **Edge Deployment**:
+4. **Edge Deployment**:
    - For latency-critical use cases, consider **edge deployment** to serve the model closer to the user’s location.
 
 #### **Model Evaluation and Monitoring**
